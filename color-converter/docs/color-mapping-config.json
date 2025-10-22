@@ -1,0 +1,55 @@
+{
+  "name": "Blue to Purple Scheme",
+  "description": "Convert blue-based design to purple theme",
+  "version": "1.0.0",
+  "createdAt": "2025-10-20",
+  "mappings": {
+    "simple": {
+      "blue-50": "purple-50",
+      "blue-100": "purple-100",
+      "blue-200": "purple-200",
+      "blue-300": "purple-300",
+      "blue-400": "purple-400",
+      "blue-500": "purple-500",
+      "blue-600": "purple-600",
+      "blue-700": "purple-700",
+      "blue-800": "purple-800",
+      "blue-900": "purple-900"
+    },
+    "complex": {
+      "gray-50": "slate-50",
+      "gray-100": "slate-100",
+      "gray-200": "slate-200",
+      "gray-300": "slate-300",
+      "gray-400": "slate-400",
+      "gray-500": "slate-500",
+      "gray-600": "slate-600",
+      "gray-700": "slate-700",
+      "gray-800": "slate-800",
+      "gray-900": "slate-900"
+    }
+  },
+  "rules": {
+    "preserveShades": true,
+    "preserveOpacity": true,
+    "handleArbitraryValues": false
+  },
+  "presets": [
+    {
+      "name": "Corporate Blue to Green",
+      "mappings": {
+        "blue-500": "emerald-500",
+        "blue-600": "emerald-600",
+        "blue-700": "emerald-700"
+      }
+    },
+    {
+      "name": "Warm to Cool",
+      "mappings": {
+        "red-500": "blue-500",
+        "orange-500": "cyan-500",
+        "yellow-500": "indigo-500"
+      }
+    }
+  ]
+}

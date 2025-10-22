@@ -1,4 +1,5 @@
 import "./App.css";
+import { ParserDemo } from "./components/ParserDemo";
 
 function App() {
   return (
@@ -59,6 +60,11 @@ function App() {
           <button className="btn-primary">
             Start Converting Colors
           </button>
+        </div>
+
+        {/* Parser Demo Section */}
+        <div className="mt-12 border-t border-gray-200 pt-8">
+          <ParserDemo />
         </div>
       </div>
     </div>

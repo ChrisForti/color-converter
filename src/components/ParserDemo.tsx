@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { parseColorClasses } from '../utils/tailwind-parser';
-import type { TailwindColorClass } from '../utils/tailwind-parser';
+import { useState } from "react";
+import { parseColorClasses } from "../utils/tailwind-parser";
+import type { TailwindColorClass } from "../utils/tailwind-parser";
 
 export function ParserDemo() {
-  const [input, setInput] = useState(`<div className="bg-blue-500 hover:bg-blue-600 text-white border-2 border-blue-300">
+  const [input, setInput] =
+    useState(`<div className="bg-blue-500 hover:bg-blue-600 text-white border-2 border-blue-300">
   <h1 className="text-2xl text-blue-900 mb-4">Title</h1>
   <p className="text-gray-600 dark:text-gray-300">Content</p>
   <button className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">
@@ -21,9 +22,9 @@ export function ParserDemo() {
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h2 className="text-2xl font-bold text-gray-900 mb-6">
-        🔍 Tailwind Class Parser Demo
+        Tailwind Class Parser Demo
       </h2>
-      
+
       <div className="grid md:grid-cols-2 gap-6">
         {/* Input */}
         <div>
@@ -61,16 +62,18 @@ export function ParserDemo() {
                       {cls.full}
                     </div>
                     <div className="text-gray-600 text-xs mt-1">
-                      Property: <code>{cls.property}</code> • 
-                      Color: <code>{cls.color}</code>
+                      Property: <code>{cls.property}</code> • Color:{" "}
+                      <code>{cls.color}</code>
                       {cls.shade && (
                         <>
-                          {' '}• Shade: <code>{cls.shade}</code>
+                          {" "}
+                          • Shade: <code>{cls.shade}</code>
                         </>
                       )}
                       {cls.modifiers.length > 0 && (
                         <>
-                          {' '}• Modifiers: <code>{cls.modifiers.join(', ')}</code>
+                          {" "}
+                          • Modifiers: <code>{cls.modifiers.join(", ")}</code>
                         </>
                       )}
                     </div>
@@ -79,7 +82,8 @@ export function ParserDemo() {
               </div>
             ) : (
               <div className="text-gray-500 text-center py-8">
-                No color classes found. Click "Parse Color Classes" to analyze the input.
+                No color classes found. Click "Parse Color Classes" to analyze
+                the input.
               </div>
             )}
           </div>
@@ -89,28 +93,32 @@ export function ParserDemo() {
       {/* Stats */}
       {parsedClasses.length > 0 && (
         <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <h3 className="font-semibold text-blue-900 mb-2">Parser Statistics:</h3>
+          <h3 className="font-semibold text-blue-900 mb-2">
+            Parser Statistics:
+          </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
             <div>
               <span className="text-blue-600 font-medium">Total Classes:</span>
-              <div className="text-2xl font-bold text-blue-900">{parsedClasses.length}</div>
+              <div className="text-2xl font-bold text-blue-900">
+                {parsedClasses.length}
+              </div>
             </div>
             <div>
               <span className="text-blue-600 font-medium">Unique Colors:</span>
               <div className="text-2xl font-bold text-blue-900">
-                {new Set(parsedClasses.map(c => c.color)).size}
+                {new Set(parsedClasses.map((c) => c.color)).size}
               </div>
             </div>
             <div>
               <span className="text-blue-600 font-medium">Properties:</span>
               <div className="text-2xl font-bold text-blue-900">
-                {new Set(parsedClasses.map(c => c.property)).size}
+                {new Set(parsedClasses.map((c) => c.property)).size}
               </div>
             </div>
             <div>
               <span className="text-blue-600 font-medium">With Modifiers:</span>
               <div className="text-2xl font-bold text-blue-900">
-                {parsedClasses.filter(c => c.modifiers.length > 0).length}
+                {parsedClasses.filter((c) => c.modifiers.length > 0).length}
               </div>
             </div>
           </div>

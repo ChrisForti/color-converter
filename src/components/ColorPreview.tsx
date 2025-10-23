@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { parseColorClasses } from "../utils/tailwind-parser";
 import { mapClassString, PRESET_MAPPINGS } from "../utils/color-mapper";
+import type { ColorMappingConfig, ColorMapping } from "../utils/color-mapper";
+import { CustomMappingCreator } from "./CustomMappingCreator";
 
 export function ColorPreview() {
   const [selectedMapping, setSelectedMapping] =
     useState<string>("blue-to-purple");
+  const [customMappings, setCustomMappings] = useState<
+    Record<string, ColorMappingConfig>
+  >({});
   const [inputHtml, setInputHtml] =
     useState(`<div className="bg-blue-500 hover:bg-blue-600 text-white p-6 rounded-lg border-2 border-blue-300">
   <h2 className="text-2xl text-blue-900 mb-4">Sample Component</h2>
@@ -17,8 +22,21 @@ export function ColorPreview() {
   </div>
 </div>`);
 
-  const currentMapping = PRESET_MAPPINGS[selectedMapping];
+  // Combine preset and custom mappings
+  const allMappings = { ...PRESET_MAPPINGS, ...customMappings };
+  const currentMapping = allMappings[selectedMapping];
   const convertedHtml = mapClassString(inputHtml, currentMapping.mappings);
+
+  // Handle custom mapping creation
+  const handleCustomMappingCreated = (mapping: ColorMapping, name: string) => {
+    const customKey = `custom-${Date.now()}`;
+    const newCustomMapping: ColorMappingConfig = {
+      name,
+      mappings: mapping,
+    };
+    setCustomMappings((prev) => ({ ...prev, [customKey]: newCustomMapping }));
+    setSelectedMapping(customKey); // Auto-select the new mapping
+  };
 
   // Parse color classes for statistics
   const originalClasses = parseColorClasses(inputHtml);
@@ -39,21 +57,35 @@ export function ColorPreview() {
         Interactive Color Preview
       </h2>
 
+      {/* Custom Mapping Creator */}
+      <CustomMappingCreator onMappingCreated={handleCustomMappingCreated} />
+
       {/* Controls */}
       <div className="mb-6 p-4 bg-gray-50 rounded-lg border">
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Color Mapping Preset:
+          Color Mapping:
         </label>
         <select
           value={selectedMapping}
           onChange={(e) => setSelectedMapping(e.target.value)}
           className="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         >
-          {Object.entries(PRESET_MAPPINGS).map(([key, config]) => (
-            <option key={key} value={key}>
-              {config.name}
-            </option>
-          ))}
+          <optgroup label="Presets">
+            {Object.entries(PRESET_MAPPINGS).map(([key, config]) => (
+              <option key={key} value={key}>
+                {config.name}
+              </option>
+            ))}
+          </optgroup>
+          {Object.keys(customMappings).length > 0 && (
+            <optgroup label="Custom Mappings">
+              {Object.entries(customMappings).map(([key, config]) => (
+                <option key={key} value={key}>
+                  {config.name}
+                </option>
+              ))}
+            </optgroup>
+          )}
         </select>
       </div>
 

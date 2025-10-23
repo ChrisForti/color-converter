@@ -22,127 +22,59 @@ Try it out: **[https://chrisforti.github.io/color-converter/](https://chrisforti
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-### Coming Soon
 
-- 🔄 **Tailwind Class Parser** - Extract color classes from HTML/JSX files## Expanding the ESLint configuration
+## 🎯 Use Cases
 
-- 🎨 **Interactive Preview** - Before/after color scheme visualization
+### Interactive Web Tool (Current Implementation) ✅
+Copy and paste your HTML/JSX code to see instant color scheme conversions with live preview. Perfect for prototyping and small-scale conversions.
 
-- ⚙️ **Color Mapping Engine** - Core conversion logicIf you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Browser Extension (Future Enhancement) 🔮
+A Chrome/Firefox extension that injects CSS to override colors. Works on any site and persists across sessions.
 
-- 📄 **Configuration Generator** - Export reusable mapping configs
+### CLI Tool (Planned) 📋
+Command-line interface for batch processing Tailwind files in your projects. Parse your codebase and systematically convert color classes from one palette to another.
 
-- 📁 **Batch File Processing** - Convert multiple files at once```js
+### Proxy/Wrapper App (Possible Future Feature) 🌐
+Fetch and render another app's HTML with modified colors (limited by CORS). Useful for previewing external sites with different color schemes.
 
-- 💻 **CLI Interface** - Command-line tool for automationexport default defineConfig([
+## 🛠️ Quick Start
 
-- 🌙 **Advanced Pattern Support** - Dark mode, hover states, responsive variants globalIgnores(['dist']),
+### Prerequisites
+- Node.js 18+
+- npm or yarn
 
-- 🧪 **Comprehensive Testing** - Robust test suite {
+### Installation
 
-  files: ['**/*.{ts,tsx}'],
+```bash
+# Clone the repository
+git clone https://github.com/ChrisForti/color-converter
+cd color-converter
 
-## 🎯 Use Cases extends: [
-
-      // Other configs...
-
-### Browser Extension (Most Practical)
-
-A Chrome/Firefox extension that injects CSS to override colors. Works on any site and persists across sessions. // Remove tseslint.configs.recommended and replace with this
-
-      tseslint.configs.recommendedTypeChecked,
-
-### Build-Time Converter (Best for Your Own Apps) // Alternatively, use this for stricter rules
-
-Parse your Tailwind codebase and systematically convert color classes from one palette to another. tseslint.configs.strictTypeChecked,
-
-      // Optionally, add this for stylistic rules
-
-### Proxy/Wrapper App tseslint.configs.stylisticTypeChecked,
-
-Fetch and render another app's HTML with modified colors (limited by CORS).
-
-      // Other configs...
-
-## 🛠️ Quick Start ],
-
-    languageOptions: {
-
-### Prerequisites parserOptions: {
-
-- Node.js 18+ project: ['./tsconfig.node.json', './tsconfig.app.json'],
-
-- npm or yarn tsconfigRootDir: import.meta.dirname,
-
-      },
-
-### Installation // other options...
-
-````bash },
-
-# Clone the repository  },
-
-git clone https://github.com/yourusername/color-converter])
-
-cd color-converter```
-
-
-
-# Install dependenciesYou can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
+# Install dependencies
 npm install
 
-```js
+# Start development server
+npm run dev
+```
 
-# Start development server// eslint.config.js
+### Usage
+1. Open `http://localhost:5173` in your browser
+2. See the demo showing blue → purple color scheme conversion
+3. Explore the interactive components and styling examples
 
-npm run devimport reactX from 'eslint-plugin-react-x'
+## 🎨 Color Mapping Configuration
 
-```import reactDom from 'eslint-plugin-react-dom'
+### Basic Example
 
-
-
-### Usageexport default defineConfig([
-
-1. Open `http://localhost:5173` in your browser  globalIgnores(['dist']),
-
-2. See the demo showing blue → purple color scheme conversion  {
-
-3. Explore the interactive components and styling examples    files: ['**/*.{ts,tsx}'],
-
-    extends: [
-
-## 🎨 Color Mapping Configuration      // Other configs...
-
-      // Enable lint rules for React
-
-### Basic Example      reactX.configs['recommended-typescript'],
-
-```json      // Enable lint rules for React DOM
-
-{      reactDom.configs.recommended,
-
-  "name": "Blue to Purple Scheme",    ],
-
-  "description": "Convert blue-based design to purple theme",    languageOptions: {
-
-  "mappings": {      parserOptions: {
-
-    "simple": {        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-
-      "blue-500": "purple-500",        tsconfigRootDir: import.meta.dirname,
-
-      "blue-600": "purple-600",      },
-
-      "blue-700": "purple-700"      // other options...
-
-    }    },
-
-  }  },
-
-}])
-
-````
+```json
+{
+  "name": "Blue to Purple Scheme",
+  "description": "Convert blue-based design to purple theme",
+  "mappings": {
+    "blue": "purple"
+  }
+}
+```
 
 ### Advanced Configuration
 
@@ -150,21 +82,9 @@ npm run devimport reactX from 'eslint-plugin-react-x'
 {
   "name": "Corporate Theme Converter",
   "mappings": {
-    "backgrounds": {
-      "blue-500": "purple-500"
-    },
-    "text": {
-      "blue-500": "purple-600"
-    },
-    "states": {
-      "hover": {
-        "blue-500": "purple-600"
-      }
-    }
-  },
-  "rules": {
-    "preserveShades": true,
-    "maintainContrast": true
+    "blue": "purple",
+    "red": "green",
+    "gray": "slate"
   }
 }
 ```
@@ -196,16 +116,6 @@ docs/
 ```
 
 ## 🔧 Development
-
-### Available Scripts
-
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run lint         # Run ESLint
-```
-
 ### Tech Stack
 
 - **Frontend**: React 19, TypeScript, Tailwind CSS v4
@@ -225,35 +135,8 @@ npm run lint         # Run ESLint
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🌟 Roadmap
+## 🔗 Links
 
-### Phase 1: Core Functionality ✅
-
-- [x] Project setup and Tailwind integration
-- [x] Color mapping system design
-- [x] Basic demo implementation
-
-### Phase 2: Parser & Engine 🔄
-
-- [ ] Tailwind class parser
-- [ ] Color mapping logic
-- [ ] Interactive preview component
-
-### Phase 3: Advanced Features 🔮
-
-- [ ] CLI interface
-- [ ] Batch file processing
-- [ ] Browser extension
-- [ ] Advanced pattern support
-
-### Phase 4: Polish & Distribution 🚀
-
-- [ ] Comprehensive testing
-- [ ] Documentation
-- [ ] NPM package
-- [ ] VS Code extension
-
-## 📞 Support
-
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/color-converter/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/color-converter/discussions)
+- **[Live Demo](https://chrisforti.github.io/color-converter/)** - Try the tool online
+- **[Roadmap](ROADMAP.md)** - Development roadmap and current status
+- **[Contributing Guidelines](#-contributing)** - How to contribute to the project

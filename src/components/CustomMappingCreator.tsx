@@ -56,43 +56,63 @@ export function CustomMappingCreator({
     return { isValid: true };
   };
 
+  const [validationErrors, setValidationErrors] = useState<string[]>([]);
+
   const createMapping = () => {
+    const errors: string[] = [];
+
+    // Validate mapping name
     if (!mappingName.trim()) {
-      alert("Please enter a mapping name");
-      return;
+      errors.push("Please enter a mapping name");
+    } else if (mappingName.trim().length > 50) {
+      errors.push("Mapping name must be 50 characters or less");
     }
 
     const validMappings: Record<string, string> = {};
-    const errors: string[] = [];
+    const duplicateCheck = new Set<string>();
 
     for (const mapping of mappings) {
       if (mapping.from.trim() && mapping.to.trim()) {
+        // Check for duplicates
+        if (duplicateCheck.has(mapping.from.trim())) {
+          errors.push(`Duplicate source color: "${mapping.from}"`);
+          continue;
+        }
+        duplicateCheck.add(mapping.from.trim());
+
         const validation = validateMapping(mapping.from, mapping.to);
         if (validation.isValid) {
-          validMappings[mapping.from] = mapping.to;
+          validMappings[mapping.from.trim()] = mapping.to.trim();
         } else {
-          errors.push(`${mapping.from} -> ${mapping.to}: ${validation.error}`);
+          errors.push(`${mapping.from} → ${mapping.to}: ${validation.error}`);
         }
       }
     }
 
+    if (Object.keys(validMappings).length === 0 && errors.length === 0) {
+      errors.push("Please add at least one valid color mapping");
+    }
+
+    setValidationErrors(errors);
+
     if (errors.length > 0) {
-      alert("Validation errors:\n" + errors.join("\n"));
-      return;
+      return; // Don't create mapping if there are errors
     }
 
-    if (Object.keys(validMappings).length === 0) {
-      alert("Please add at least one valid color mapping");
-      return;
+    try {
+      const finalMapping = createColorMapping(validMappings);
+      onMappingCreated(finalMapping, mappingName.trim());
+
+      // Reset form
+      setMappingName("");
+      setMappings([{ from: "", to: "", id: "1" }]);
+      setValidationErrors([]);
+      setIsVisible(false);
+    } catch (error) {
+      setValidationErrors([
+        `Error creating mapping: ${error instanceof Error ? error.message : 'Unknown error'}`
+      ]);
     }
-
-    const finalMapping = createColorMapping(validMappings);
-    onMappingCreated(finalMapping, mappingName);
-
-    // Reset form
-    setMappingName("");
-    setMappings([{ from: "", to: "", id: "1" }]);
-    setIsVisible(false);
   };
 
   if (!isVisible) {
@@ -183,6 +203,18 @@ export function CustomMappingCreator({
         </button>
       </div>
 
+      {/* Validation Errors */}
+      {validationErrors.length > 0 && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
+          <h4 className="text-sm font-semibold text-red-800 mb-2">Validation Errors:</h4>
+          <ul className="text-sm text-red-700 space-y-1">
+            {validationErrors.map((error, index) => (
+              <li key={index}>• {error}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       {/* Actions */}
       <div className="flex space-x-3">
         <button
@@ -192,7 +224,10 @@ export function CustomMappingCreator({
           Create Mapping
         </button>
         <button
-          onClick={() => setIsVisible(false)}
+          onClick={() => {
+            setIsVisible(false);
+            setValidationErrors([]);
+          }}
           className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-md transition-colors"
         >
           Cancel

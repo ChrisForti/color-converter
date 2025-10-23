@@ -1,18 +1,24 @@
-# Color Scheme Converter# React + TypeScript + Vite
+# Tailwind Color Scheme Converter
 
-A powerful tool for converting Tailwind CSS color schemes in your projects. Transform your entire design system from one color palette to another with ease! This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![CI/CD Pipeline](https://github.com/ChrisForti/color-converter/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/ChrisForti/color-converter/actions/workflows/ci-cd.yml)
+[![GitHub Pages](https://img.shields.io/badge/demo-live-brightgreen)](https://chrisforti.github.io/color-converter/)
 
-## 🚀 FeaturesCurrently, two official plugins are available:
+A powerful tool for converting Tailwind CSS color schemes in your projects. Transform your entire design system from one color palette to another with ease!
 
-### Currently Available- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+## 🚀 Features
 
-- ✅ **Interactive Demo** - See color conversions in real-time- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ✅ **Interactive Preview** - Real-time before/after color conversion with live code editor
+- ✅ **Smart Color Mapping** - Intelligent shade preservation (blue-500 → purple-500)
+- ✅ **Custom Mappings** - Create your own color schemes through interactive UI
+- ✅ **Built-in Presets** - 6 ready-to-use themes (warm, nature, minimal, etc.)
+- ✅ **Robust Validation** - Handles edge cases and provides helpful error messages
+- ✅ **Tailwind CSS v4** - Built with latest Tailwind and Vite for optimal performance
 
-- ✅ **Tailwind CSS Integration** - Built with Tailwind v4 and Vite
+## 🌐 Live Demo
 
-- ✅ **Color Mapping System** - Flexible configuration for color transformations## React Compiler
+Try it out: **[https://chrisforti.github.io/color-converter/](https://chrisforti.github.io/color-converter/)**
 
-- ✅ **Styling Examples** - Comprehensive test cases for various Tailwind patterns
+## 🏗️ Development
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 

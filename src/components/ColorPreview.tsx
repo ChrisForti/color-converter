@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { parseColorClasses } from "../utils/tailwind-parser";
+import type { TailwindColorClass } from "../utils/tailwind-parser";
 import { mapClassString, PRESET_MAPPINGS } from "../utils/color-mapper";
 import type { ColorMappingConfig, ColorMapping } from "../utils/color-mapper";
 import { CustomMappingCreator } from "./CustomMappingCreator";
@@ -60,8 +61,8 @@ export function ColorPreview() {
   };
 
   // Safe parsing with error handling
-  let originalClasses: any[] = [];
-  let convertedClasses: any[] = [];
+  let originalClasses: TailwindColorClass[] = [];
+  let convertedClasses: TailwindColorClass[] = [];
   let parseError = "";
 
   try {

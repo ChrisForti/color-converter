@@ -110,7 +110,9 @@ export function CustomMappingCreator({
       setIsVisible(false);
     } catch (error) {
       setValidationErrors([
-        `Error creating mapping: ${error instanceof Error ? error.message : 'Unknown error'}`
+        `Error creating mapping: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`,
       ]);
     }
   };
@@ -206,7 +208,9 @@ export function CustomMappingCreator({
       {/* Validation Errors */}
       {validationErrors.length > 0 && (
         <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
-          <h4 className="text-sm font-semibold text-red-800 mb-2">Validation Errors:</h4>
+          <h4 className="text-sm font-semibold text-red-800 mb-2">
+            Validation Errors:
+          </h4>
           <ul className="text-sm text-red-700 space-y-1">
             {validationErrors.map((error, index) => (
               <li key={index}>• {error}</li>

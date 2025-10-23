@@ -25,21 +25,26 @@ export function ColorPreview() {
   // Combine preset and custom mappings with error handling
   const allMappings = { ...PRESET_MAPPINGS, ...customMappings };
   const currentMapping = allMappings[selectedMapping];
-  
+
   // Safe conversion with error handling
   let convertedHtml = inputHtml;
-  let conversionError = '';
-  
+  let conversionError = "";
+
   try {
     if (currentMapping && currentMapping.mappings) {
       convertedHtml = mapClassString(inputHtml, currentMapping.mappings);
     } else {
       conversionError = `Invalid mapping configuration for "${selectedMapping}"`;
-      console.error('ColorPreview: Invalid mapping configuration', currentMapping);
+      console.error(
+        "ColorPreview: Invalid mapping configuration",
+        currentMapping
+      );
     }
   } catch (error) {
-    conversionError = `Error converting colors: ${error instanceof Error ? error.message : 'Unknown error'}`;
-    console.error('ColorPreview: Conversion error', error);
+    conversionError = `Error converting colors: ${
+      error instanceof Error ? error.message : "Unknown error"
+    }`;
+    console.error("ColorPreview: Conversion error", error);
     convertedHtml = inputHtml; // Fallback to original
   }
 
@@ -57,14 +62,16 @@ export function ColorPreview() {
   // Safe parsing with error handling
   let originalClasses: any[] = [];
   let convertedClasses: any[] = [];
-  let parseError = '';
+  let parseError = "";
 
   try {
     originalClasses = parseColorClasses(inputHtml);
     convertedClasses = parseColorClasses(convertedHtml);
   } catch (error) {
-    parseError = `Error parsing classes: ${error instanceof Error ? error.message : 'Unknown error'}`;
-    console.error('ColorPreview: Parse error', error);
+    parseError = `Error parsing classes: ${
+      error instanceof Error ? error.message : "Unknown error"
+    }`;
+    console.error("ColorPreview: Parse error", error);
   }
 
   // Create renderable components (safe HTML substitution)
@@ -86,7 +93,9 @@ export function ColorPreview() {
       {(conversionError || parseError) && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
           <h3 className="text-sm font-semibold text-red-800 mb-2">Error</h3>
-          {conversionError && <p className="text-sm text-red-700 mb-1">{conversionError}</p>}
+          {conversionError && (
+            <p className="text-sm text-red-700 mb-1">{conversionError}</p>
+          )}
           {parseError && <p className="text-sm text-red-700">{parseError}</p>}
         </div>
       )}

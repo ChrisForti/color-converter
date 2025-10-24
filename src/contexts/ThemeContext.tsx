@@ -23,57 +23,64 @@ interface ThemeProviderProps {
   children: ReactNode;
 }
 
-export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    // Check localStorage first
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("color-converter-theme") as Theme;
-      if (stored && (stored === "light" || stored === "dark")) {
-        return stored;
-      }
+// Helper function to get initial theme
+function getInitialTheme(): Theme {
+  if (typeof window === "undefined") return "light";
+  
+  // Check localStorage first
+  const stored = localStorage.getItem("color-converter-theme");
+  if (stored === "light" || stored === "dark") {
+    return stored;
+  }
+  
+  // Check system preference
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
 
-      // Check system preference
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        return "dark";
-      }
-    }
-    return "light";
-  });
+// Helper function to apply theme to document
+function applyThemeToDocument(theme: Theme) {
+  if (theme === "dark") {
+    document.documentElement.classList.add("dark");
+  } else {
+    document.documentElement.classList.remove("dark");
+  }
+}
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme);
 
   const setTheme = (newTheme: Theme) => {
     setThemeState(newTheme);
     localStorage.setItem("color-converter-theme", newTheme);
-
-    // Update document class for Tailwind
-    if (newTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    applyThemeToDocument(newTheme);
   };
 
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
   };
 
-  // Initialize theme on mount
+  // Apply theme on mount and when theme changes
   useEffect(() => {
-    setTheme(theme);
-  }, []);
+    applyThemeToDocument(theme);
+  }, [theme]);
 
-  // Listen for system theme changes
+  // Listen for system theme changes only if no stored preference
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = (e: MediaQueryListEvent) => {
-      // Only update if user hasn't set a preference
-      const stored = localStorage.getItem("color-converter-theme");
-      if (!stored) {
-        setTheme(e.matches ? "dark" : "light");
+    
+    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+      // Only respond to system changes if user hasn't set a preference
+      const hasStoredPreference = localStorage.getItem("color-converter-theme");
+      if (!hasStoredPreference) {
+        const systemTheme = e.matches ? "dark" : "light";
+        setThemeState(systemTheme);
+        applyThemeToDocument(systemTheme);
       }
     };
 
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
+    return () => mediaQuery.removeEventListener("change", handleSystemThemeChange);
   }, []);
 
   return (

@@ -92,12 +92,20 @@ export function ColorPreview() {
 
       {/* Error Display */}
       {(conversionError || parseError) && (
-        <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-          <h3 className="text-sm font-semibold text-red-800 mb-2">Error</h3>
+        <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+          <h3 className="text-sm font-semibold text-red-800 dark:text-red-300 mb-2">
+            Error
+          </h3>
           {conversionError && (
-            <p className="text-sm text-red-700 mb-1">{conversionError}</p>
+            <p className="text-sm text-red-700 dark:text-red-400 mb-1">
+              {conversionError}
+            </p>
           )}
-          {parseError && <p className="text-sm text-red-700">{parseError}</p>}
+          {parseError && (
+            <p className="text-sm text-red-700 dark:text-red-400">
+              {parseError}
+            </p>
+          )}
         </div>
       )}
 
@@ -105,14 +113,14 @@ export function ColorPreview() {
       <CustomMappingCreator onMappingCreated={handleCustomMappingCreated} />
 
       {/* Controls */}
-      <div className="mb-6 p-4 bg-gray-50 rounded-lg border">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+      <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Color Mapping:
         </label>
         <select
           value={selectedMapping}
           onChange={(e) => setSelectedMapping(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
         >
           <optgroup label="Presets">
             {Object.entries(PRESET_MAPPINGS).map(([key, config]) => (
@@ -141,7 +149,7 @@ export function ColorPreview() {
         <textarea
           value={inputHtml}
           onChange={(e) => setInputHtml(e.target.value)}
-          className="w-full h-32 p-3 border border-gray-300 rounded-md font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full h-32 p-3 border border-gray-300 dark:border-gray-600 rounded-md font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
           placeholder="Paste your HTML/JSX here..."
         />
       </div>
@@ -150,12 +158,12 @@ export function ColorPreview() {
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         {/* Original */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center">
             <span className="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
             Original (Before)
           </h3>
-          <div className="border border-gray-200 rounded-lg p-4 bg-white min-h-48">
-            <div className="font-mono text-xs text-gray-500 mb-3 border-b border-gray-100 pb-2">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-800 min-h-48">
+            <div className="font-mono text-xs text-gray-500 dark:text-gray-400 mb-3 border-b border-gray-100 dark:border-gray-700 pb-2">
               Classes: {originalClasses.length} color classes found
             </div>
             <div
@@ -171,12 +179,12 @@ export function ColorPreview() {
 
         {/* Converted */}
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3 flex items-center">
             <span className="w-3 h-3 bg-purple-500 rounded-full mr-2"></span>
             Converted (After)
           </h3>
-          <div className="border border-gray-200 rounded-lg p-4 bg-white min-h-48">
-            <div className="font-mono text-xs text-gray-500 mb-3 border-b border-gray-100 pb-2">
+          <div className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-800 min-h-48">
+            <div className="font-mono text-xs text-gray-500 dark:text-gray-400 mb-3 border-b border-gray-100 dark:border-gray-700 pb-2">
               Mapping: {currentMapping.name} • {convertedClasses.length} color
               classes
             </div>
@@ -196,28 +204,28 @@ export function ColorPreview() {
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         {/* Original Code */}
         <div>
-          <h4 className="text-md font-medium text-gray-700 mb-2">
+          <h4 className="text-md font-medium text-gray-700 dark:text-gray-300 mb-2">
             Original Code:
           </h4>
-          <pre className="text-xs bg-gray-100 border border-gray-200 rounded p-3 overflow-x-auto max-h-40">
+          <pre className="text-xs bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded p-3 overflow-x-auto max-h-40 text-gray-900 dark:text-gray-100">
             <code>{inputHtml}</code>
           </pre>
         </div>
 
         {/* Converted Code */}
         <div>
-          <h4 className="text-md font-medium text-gray-700 mb-2">
+          <h4 className="text-md font-medium text-gray-700 dark:text-gray-300 mb-2">
             Converted Code:
           </h4>
-          <pre className="text-xs bg-green-50 border border-green-200 rounded p-3 overflow-x-auto max-h-40">
+          <pre className="text-xs bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded p-3 overflow-x-auto max-h-40 text-gray-900 dark:text-gray-100">
             <code>{convertedHtml}</code>
           </pre>
         </div>
       </div>
 
       {/* Mapping Details */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h4 className="font-semibold text-blue-900 mb-3">
+      <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+        <h4 className="font-semibold text-blue-900 dark:text-blue-300 mb-3">
           Active Color Mappings:
         </h4>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
@@ -225,9 +233,13 @@ export function ColorPreview() {
             .slice(0, 8)
             .map(([from, to]) => (
               <div key={from} className="flex items-center space-x-2">
-                <span className="font-mono text-blue-700">{from}</span>
-                <span className="text-gray-400">→</span>
-                <span className="font-mono text-purple-700">{to}</span>
+                <span className="font-mono text-blue-700 dark:text-blue-400">
+                  {from}
+                </span>
+                <span className="text-gray-400 dark:text-gray-500">→</span>
+                <span className="font-mono text-purple-700 dark:text-purple-400">
+                  {to}
+                </span>
               </div>
             ))}
           {Object.keys(currentMapping.mappings).length > 8 && (
@@ -240,33 +252,41 @@ export function ColorPreview() {
 
       {/* Statistics */}
       <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white p-4 border border-gray-200 rounded-lg text-center">
-          <div className="text-2xl font-bold text-blue-600">
+        <div className="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700 rounded-lg text-center">
+          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
             {originalClasses.length}
           </div>
-          <div className="text-sm text-gray-600">Original Classes</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">
+            Original Classes
+          </div>
         </div>
-        <div className="bg-white p-4 border border-gray-200 rounded-lg text-center">
-          <div className="text-2xl font-bold text-purple-600">
+        <div className="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700 rounded-lg text-center">
+          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             {convertedClasses.length}
           </div>
-          <div className="text-sm text-gray-600">Converted Classes</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">
+            Converted Classes
+          </div>
         </div>
-        <div className="bg-white p-4 border border-gray-200 rounded-lg text-center">
-          <div className="text-2xl font-bold text-green-600">
+        <div className="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700 rounded-lg text-center">
+          <div className="text-2xl font-bold text-green-600 dark:text-green-400">
             {Object.keys(currentMapping.mappings).length}
           </div>
-          <div className="text-sm text-gray-600">Mapping Rules</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">
+            Mapping Rules
+          </div>
         </div>
-        <div className="bg-white p-4 border border-gray-200 rounded-lg text-center">
-          <div className="text-2xl font-bold text-orange-600">
+        <div className="bg-white dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700 rounded-lg text-center">
+          <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
             {
               new Set(
                 [...originalClasses, ...convertedClasses].map((c) => c.color)
               ).size
             }
           </div>
-          <div className="text-sm text-gray-600">Unique Colors</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400">
+            Unique Colors
+          </div>
         </div>
       </div>
     </div>

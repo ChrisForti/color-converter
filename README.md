@@ -7,39 +7,85 @@ A powerful tool for converting Tailwind CSS color schemes in your projects. Tran
 
 ## 🚀 Features
 
-- ✅ **Interactive Preview** - Real-time before/after color conversion with live code editor
-- ✅ **Smart Color Mapping** - Intelligent shade preservation (blue-500 → purple-500)
-- ✅ **Custom Mappings** - Create your own color schemes through interactive UI
-- ✅ **Built-in Presets** - 6 ready-to-use themes (warm, nature, minimal, etc.)
-- ✅ **Robust Validation** - Handles edge cases and provides helpful error messages
-- ✅ **Tailwind CSS v4** - Built with latest Tailwind and Vite for optimal performance
+### 🎯 Interactive Color Editor
+
+- ✅ **Real-time Conversion** - Paste HTML/JSX and see instant color transformations
+- ✅ **Smart Parsing** - Automatically detects and parses Tailwind color classes
+- ✅ **Visual Before/After** - Side-by-side comparison of original vs converted code
+- ✅ **Error Handling** - Clear feedback for invalid mappings or syntax errors
+- ✅ **Statistics Display** - Shows conversion statistics and affected classes
+
+### 🌐 Website Preview Mode (NEW!)
+
+- ✅ **Live Website Testing** - Preview color schemes on real websites via iframe
+- ✅ **URL Input** - Test any website that allows iframe embedding
+- ✅ **CSS Injection** - Direct CSS injection for same-origin sites
+- ✅ **Fallback Filters** - CSS filters for CORS-restricted sites
+- ✅ **Working Examples** - Pre-configured URLs that work well for testing
+
+### 🎨 Advanced Color System
+
+- ✅ **6 Built-in Presets** - Blue to Purple, Tech to Nature, Warm to Cool, etc.
+- ✅ **Custom Mappings** - Create your own color transformations through UI
+- ✅ **Visual Mapping Preview** - See exactly which colors are being mapped
+- ✅ **Intelligent Validation** - Prevents invalid color combinations
+
+### 🌙 Modern UX
+
+- ✅ **Dark Mode Support** - Full theme system with system preference detection
+- ✅ **Responsive Design** - Works perfectly on desktop and mobile
+- ✅ **Smooth Transitions** - Animated theme switching and state changes
+- ✅ **Debug Mode** - Expandable CSS preview for troubleshooting
 
 ## 🌐 Live Demo
 
 Try it out: **[https://chrisforti.github.io/color-converter/](https://chrisforti.github.io/color-converter/)**
 
+## ⚠️ Known Limitations
+
+### CORS Restrictions in Website Preview Mode
+
+The Website Preview feature faces some limitations due to browser security policies:
+
+- **Same-Origin Policy**: Direct CSS injection only works for sites from the same origin
+- **X-Frame-Options**: Many sites (especially social media, banking) block iframe embedding
+- **Content Security Policy**: Some sites prevent external CSS injection
+
+**Workarounds we've implemented:**
+
+- 🔄 **CSS Filters**: Automatic fallback using CSS filters for basic color adjustments
+- 📋 **Example URLs**: Curated list of sites that work well for testing
+- 🔧 **Manual Testing**: Copy generated CSS for manual browser dev tools testing
+- 🔁 **Retry Logic**: Multiple injection attempts with intelligent fallback
+
+**Best results with:** Documentation sites, simple websites, development tools, and local development servers.
+
 ## 🏗️ Development
 
 The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-
 ## 🎯 Use Cases
 
 ### Interactive Web Tool (Current Implementation) ✅
+
 Copy and paste your HTML/JSX code to see instant color scheme conversions with live preview. Perfect for prototyping and small-scale conversions.
 
 ### Browser Extension (Future Enhancement) 🔮
+
 A Chrome/Firefox extension that injects CSS to override colors. Works on any site and persists across sessions.
 
 ### CLI Tool (Planned) 📋
+
 Command-line interface for batch processing Tailwind files in your projects. Parse your codebase and systematically convert color classes from one palette to another.
 
 ### Proxy/Wrapper App (Possible Future Feature) 🌐
+
 Fetch and render another app's HTML with modified colors (limited by CORS). Useful for previewing external sites with different color schemes.
 
 ## 🛠️ Quick Start
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 
@@ -58,6 +104,7 @@ npm run dev
 ```
 
 ### Usage
+
 1. Open `http://localhost:5173` in your browser
 2. See the demo showing blue → purple color scheme conversion
 3. Explore the interactive components and styling examples
@@ -116,6 +163,7 @@ docs/
 ```
 
 ## 🔧 Development
+
 ### Tech Stack
 
 - **Frontend**: React 19, TypeScript, Tailwind CSS v4

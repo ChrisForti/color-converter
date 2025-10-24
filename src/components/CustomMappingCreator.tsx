@@ -121,7 +121,7 @@ export function CustomMappingCreator({
     return (
       <button
         onClick={() => setIsVisible(true)}
-        className="px-4 py-2 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-md text-sm text-gray-700 transition-colors"
+        className="px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-700 dark:text-gray-300 transition-colors"
       >
         Create Custom Mapping
       </button>
@@ -129,14 +129,14 @@ export function CustomMappingCreator({
   }
 
   return (
-    <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 mb-6">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
           Create Custom Mapping
         </h3>
         <button
           onClick={() => setIsVisible(false)}
-          className="text-gray-400 hover:text-gray-600"
+          className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
         >
           ✕
         </button>
@@ -144,7 +144,7 @@ export function CustomMappingCreator({
 
       {/* Mapping Name */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Mapping Name:
         </label>
         <input
@@ -152,13 +152,13 @@ export function CustomMappingCreator({
           value={mappingName}
           onChange={(e) => setMappingName(e.target.value)}
           placeholder="e.g., My Custom Theme"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
         />
       </div>
 
       {/* Color Mappings */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Color Mappings:
         </label>
         <div className="space-y-2">
@@ -172,9 +172,9 @@ export function CustomMappingCreator({
                     updateMapping(mapping.id, "from", e.target.value)
                   }
                   placeholder="From (e.g., blue)"
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
                 />
-                <span className="text-gray-400">→</span>
+                <span className="text-gray-400 dark:text-gray-500">→</span>
                 <input
                   type="text"
                   value={mapping.to}
@@ -182,12 +182,12 @@ export function CustomMappingCreator({
                     updateMapping(mapping.id, "to", e.target.value)
                   }
                   placeholder="To (e.g., purple)"
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
                 />
                 {mappings.length > 1 && (
                   <button
                     onClick={() => removeMapping(mapping.id)}
-                    className="px-2 py-2 text-red-500 hover:text-red-700"
+                    className="px-2 py-2 text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
                   >
                     ✕
                   </button>
@@ -199,7 +199,7 @@ export function CustomMappingCreator({
 
         <button
           onClick={addMapping}
-          className="mt-2 px-3 py-1 text-sm text-blue-600 hover:text-blue-800"
+          className="mt-2 px-3 py-1 text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
         >
           + Add Another Mapping
         </button>
@@ -207,11 +207,11 @@ export function CustomMappingCreator({
 
       {/* Validation Errors */}
       {validationErrors.length > 0 && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
-          <h4 className="text-sm font-semibold text-red-800 mb-2">
+        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+          <h4 className="text-sm font-semibold text-red-800 dark:text-red-300 mb-2">
             Validation Errors:
           </h4>
-          <ul className="text-sm text-red-700 space-y-1">
+          <ul className="text-sm text-red-700 dark:text-red-400 space-y-1">
             {validationErrors.map((error, index) => (
               <li key={index}>• {error}</li>
             ))}
@@ -223,7 +223,7 @@ export function CustomMappingCreator({
       <div className="flex space-x-3">
         <button
           onClick={createMapping}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white rounded-md transition-colors"
         >
           Create Mapping
         </button>
@@ -232,14 +232,14 @@ export function CustomMappingCreator({
             setIsVisible(false);
             setValidationErrors([]);
           }}
-          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-md transition-colors"
+          className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-md transition-colors"
         >
           Cancel
         </button>
       </div>
 
       {/* Help Text */}
-      <div className="mt-4 text-xs text-gray-500">
+      <div className="mt-4 text-xs text-gray-500 dark:text-gray-400">
         <p className="mb-1">
           Valid Tailwind colors: red, blue, green, purple, gray, slate, etc.
         </p>

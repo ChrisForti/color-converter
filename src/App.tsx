@@ -6,10 +6,10 @@ import { ProxyPreview } from "./components/ProxyPreview";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ThemeToggle } from "./components/ThemeToggle";
 
-type AppMode = 'interactive' | 'proxy';
+type AppMode = "interactive" | "proxy";
 
 function App() {
-  const [currentMode, setCurrentMode] = useState<AppMode>('interactive');
+  const [currentMode, setCurrentMode] = useState<AppMode>("interactive");
 
   return (
     <ThemeProvider>
@@ -23,7 +23,8 @@ function App() {
                   Tailwind Color Scheme Converter
                 </h1>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
-                  Transform your design system from one color palette to another instantly
+                  Transform your design system from one color palette to another
+                  instantly
                 </p>
               </div>
               <div className="flex-1 flex justify-end">
@@ -35,21 +36,21 @@ function App() {
             <div className="flex justify-center mb-8">
               <div className="flex bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-1 shadow-sm">
                 <button
-                  onClick={() => setCurrentMode('interactive')}
+                  onClick={() => setCurrentMode("interactive")}
                   className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
-                    currentMode === 'interactive'
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                    currentMode === "interactive"
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
                   }`}
                 >
                   Interactive Editor
                 </button>
                 <button
-                  onClick={() => setCurrentMode('proxy')}
+                  onClick={() => setCurrentMode("proxy")}
                   className={`px-6 py-2 rounded-md text-sm font-medium transition-colors ${
-                    currentMode === 'proxy'
-                      ? 'bg-blue-600 text-white'
-                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                    currentMode === "proxy"
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
                   }`}
                 >
                   Website Preview
@@ -58,25 +59,25 @@ function App() {
             </div>
           </header>
 
-        {/* Mode Content */}
-        {currentMode === 'interactive' ? (
-          <div>
-            {/* Interactive Color Preview */}
-            <ColorPreview />
+          {/* Mode Content */}
+          {currentMode === "interactive" ? (
+            <div>
+              {/* Interactive Color Preview */}
+              <ColorPreview />
 
-            {/* Parser Demo Section */}
-            <div className="mt-12 border-t border-gray-200 pt-8">
-              <ParserDemo />
+              {/* Parser Demo Section */}
+              <div className="mt-12 border-t border-gray-200 pt-8">
+                <ParserDemo />
+              </div>
             </div>
-          </div>
-        ) : (
-          <div>
-            {/* Proxy Mode */}
-            <ProxyPreview />
-          </div>
-        )}
+          ) : (
+            <div>
+              {/* Proxy Mode */}
+              <ProxyPreview />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
     </ThemeProvider>
   );
 }

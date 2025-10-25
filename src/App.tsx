@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./App.css";
 import { ParserDemo } from "./components/ParserDemo";
 import { ColorPreview } from "./components/ColorPreview";
 import { ProxyPreview } from "./components/ProxyPreview";

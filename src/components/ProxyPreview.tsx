@@ -569,12 +569,12 @@ export function ProxyPreview() {
               value={targetUrl}
               onChange={handleUrlChange}
               placeholder="https://example.com"
-              className={`flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+              className={`flex-1 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 ${
                 error && targetUrl.trim()
-                  ? "border-red-300 bg-red-50"
+                  ? "border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20"
                   : isUrlValid || !targetUrl.trim()
-                  ? "border-gray-300"
-                  : "border-yellow-300 bg-yellow-50"
+                  ? "border-gray-300 dark:border-gray-600"
+                  : "border-yellow-300 dark:border-yellow-600 bg-yellow-50 dark:bg-yellow-900/20"
               }`}
               disabled={isLoading}
             />
@@ -598,13 +598,13 @@ export function ProxyPreview() {
         <CustomMappingCreator onMappingCreated={handleCustomMappingCreated} />
 
         {/* Color Mapping Controls */}
-        <div className="mb-6 p-4 bg-gray-50 rounded-lg border">
+        <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between mb-4">
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Color Mapping:
             </label>
             {currentMapping && (
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-gray-500 dark:text-gray-400">
                 {
                   Object.keys(allMappings[selectedMapping]?.mappings || {})
                     .length
@@ -630,7 +630,7 @@ export function ProxyPreview() {
               );
               setSelectedMapping(e.target.value);
             }}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-3"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
           >
             <optgroup label="Presets">
               {Object.entries(PRESET_MAPPINGS).map(([key, config]) => (
@@ -652,8 +652,8 @@ export function ProxyPreview() {
 
           {/* Color Mapping Preview */}
           {allMappings[selectedMapping] && (
-            <div className="mt-3 p-3 bg-white rounded border">
-              <h4 className="text-sm font-medium text-gray-700 mb-2">
+            <div className="mt-3 p-3 bg-white dark:bg-gray-800 rounded border border-gray-200 dark:border-gray-700">
+              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Active Color Mappings:
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs mb-3">
@@ -661,7 +661,7 @@ export function ProxyPreview() {
                   ([from, to]) => (
                     <div
                       key={`${from}-${to}`}
-                      className="flex items-center justify-between p-2 bg-gray-50 rounded"
+                      className="flex items-center justify-between p-2 bg-gray-50 dark:bg-gray-700 rounded"
                     >
                       <span
                         className={`px-2 py-1 rounded text-white bg-${from.replace(
@@ -735,13 +735,13 @@ export function ProxyPreview() {
 
       {/* Website Preview */}
       {loadedUrl && !error && (
-        <div className="border border-gray-200 rounded-lg overflow-hidden bg-white">
-          <div className="bg-gray-100 px-4 py-2 border-b border-gray-200 flex items-center justify-between">
-            <span className="text-sm text-gray-600 truncate">
+        <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800">
+          <div className="bg-gray-100 dark:bg-gray-700 px-4 py-2 border-b border-gray-200 dark:border-gray-600 flex items-center justify-between">
+            <span className="text-sm text-gray-600 dark:text-gray-300 truncate">
               Preview: {loadedUrl}
             </span>
             <div className="flex items-center gap-3 shrink-0">
-              <span className="text-xs text-gray-500">
+              <span className="text-xs text-gray-500 dark:text-gray-400">
                 Mapping: {currentMapping?.name}
               </span>
               <button
@@ -876,11 +876,11 @@ export function ProxyPreview() {
               This website doesn't allow embedding in iframes for security
               reasons.
             </p>
-            <div className="bg-white p-4 rounded-lg border border-yellow-200">
-              <h4 className="font-medium text-yellow-900 mb-2">
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg border border-yellow-200 dark:border-yellow-600">
+              <h4 className="font-medium text-yellow-900 dark:text-yellow-300 mb-2">
                 Try These Alternatives:
               </h4>
-              <div className="text-sm text-yellow-800 space-y-2">
+              <div className="text-sm text-yellow-800 dark:text-yellow-300 space-y-2">
                 <p>
                   • Use the Interactive Editor mode to test your HTML/CSS
                   directly
@@ -898,11 +898,11 @@ export function ProxyPreview() {
       )}
 
       {/* Helpful Information */}
-      <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h3 className="font-semibold text-blue-900 mb-3">How It Works</h3>
-        <div className="grid md:grid-cols-2 gap-4 text-blue-800 text-sm">
+      <div className="mt-8 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6">
+        <h3 className="font-semibold text-blue-900 dark:text-blue-300 mb-3">How It Works</h3>
+        <div className="grid md:grid-cols-2 gap-4 text-blue-800 dark:text-blue-300 text-sm">
           <div>
-            <h4 className="font-medium mb-2">🎯 Getting Started</h4>
+            <h4 className="font-medium mb-2 text-blue-900 dark:text-blue-200">🎯 Getting Started</h4>
             <ul className="space-y-1">
               <li>• Enter any website URL to load it in a preview frame</li>
               <li>
@@ -915,7 +915,7 @@ export function ProxyPreview() {
             </ul>
           </div>
           <div>
-            <h4 className="font-medium mb-2">⚡ Technical Details</h4>
+            <h4 className="font-medium mb-2 text-blue-900 dark:text-blue-200">⚡ Technical Details</h4>
             <ul className="space-y-1">
               <li>• CSS injection attempts to override colors in real-time</li>
               <li>
